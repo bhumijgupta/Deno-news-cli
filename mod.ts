@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno --allow-net --allow-read=./news-cli.json --allow-write=./news-cli.json
 // ***************
 // IMPORTS
 // ***************
@@ -61,12 +62,14 @@ const invalidFlags = (parsedArgs: Args): string | null => {
     let key = keys[i];
     if (!validFlags.has(key)) return `Found invalid flag ${key}`;
     if (
-      (key === "query" || key === "q") && typeof parsedArgs[key] !== "string"
+      (key === "query" || key === "q") &&
+      typeof parsedArgs[key] !== "string"
     ) {
       return `Found invalid value for flag ${key}`;
     }
     if (
-      (key === "category" || key === "c") && invalidCategory(parsedArgs[key])
+      (key === "category" || key === "c") &&
+      invalidCategory(parsedArgs[key])
     ) {
       return `Found invalid value for flag ${key}`;
     }
