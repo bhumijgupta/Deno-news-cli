@@ -21,8 +21,7 @@ const setApiKey = (parsedArgs: Args): void => {
     writeJsonSync("./news-cli.json", { apiKey: parsedArgs.config });
     console.log(`${green(bold("Success"))} ApiKey set Successfully`);
     displayHelpAndQuit();
-  }
-  //   Handling if apiKey is not present after --config
+  } //   Handling if apiKey is not present after --config
   else displayHelpAndQuit("Config flag should be followed by apiKey");
 };
 
@@ -55,23 +54,32 @@ const invalidFlags = (parsedArgs: Args): string | null => {
     (parsedArgs.c || parsedArgs.category) &&
     parsedArgs.l === undefined &&
     parsedArgs.length === undefined
-  )
+  ) {
     return "Category filter can only be used in conjunction with latest";
+  }
   for (let i = 0; i < keys.length; i++) {
     let key = keys[i];
     if (!validFlags.has(key)) return `Found invalid flag ${key}`;
-    if ((key === "query" || key === "q") && typeof parsedArgs[key] !== "string")
+    if (
+      (key === "query" || key === "q") && typeof parsedArgs[key] !== "string"
+    ) {
       return `Found invalid value for flag ${key}`;
-    if ((key === "category" || key === "c") && invalidCategory(parsedArgs[key]))
+    }
+    if (
+      (key === "category" || key === "c") && invalidCategory(parsedArgs[key])
+    ) {
       return `Found invalid value for flag ${key}`;
+    }
     if (
       (key === "latest" || key === "l") &&
       typeof parsedArgs[key] !== "boolean"
-    )
+    ) {
       return `Found invalid value for flag ${key}`;
+    }
 
-    if (key == "_" && parsedArgs._.length > 0)
+    if (key == "_" && parsedArgs._.length > 0) {
       return `Found invalid flag ${parsedArgs._[0]}`;
+    }
   }
   return null;
 };

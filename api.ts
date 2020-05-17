@@ -12,17 +12,18 @@ class Api {
   getNews = async (
     latest: boolean | undefined,
     category: string | undefined,
-    query: string | undefined
+    query: string | undefined,
   ) => {
     let additional: string = "";
     if (category) additional += `&category=${category}`;
     if (query) additional += `&q=${encodeURI(query)}`;
-    if (latest === undefined || latest === false)
+    if (latest === undefined || latest === false) {
       additional += "&sortBy=popularity";
+    }
     const rawResult = await fetch(
       `${this.#baseURL}${
         latest ? "top-headlines" : "everything"
-      }?language=en&pageSize=10${additional}&apiKey=${this.#apiKey}`
+      }?language=en&pageSize=10${additional}&apiKey=${this.#apiKey}`,
     );
     const result = await rawResult.json();
     if (result.status === "error") displayHelpAndQuit("INVALID_KEY");
