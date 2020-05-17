@@ -1,17 +1,25 @@
 <p align="center"><img src="https://github.com/bhumijgupta/Deno-news-cli/raw/master/assets/banner.png" alt="DALP logo"/></p>
 <p align="center">Find your quick news byte at your terminal.</p>
 
-## Run locally
+## Installation
+
+You can download the executable directly from GitHub.
+
+```
+deno install --allow-net --allow-read --allow-write -n news-cli https://raw.githubusercontent.com/bhumijgupta/Deno-news-cli/master/mod.ts
+```
+
+## Setup
 
 1. Create you free account on [https://newsapi.org/](https://newsapi.org/).
 2. Run the command to set your api key
    ```
-   deno run --allow-net --allow-read=./news-cli.json --allow-write=./news-cli.json mod.ts --config <API_KEY>
+   news-cli --config <API_KEY>
    ```
 3. Run the following command to get more info
 
 ```
-   deno run --allow-net --allow-read=./news-cli.json --allow-write=./news-cli.json mod.ts --help
+   news-cli --help
 ```
 
 ## Usage
@@ -28,4 +36,3 @@ Optional filters:
 ## To Do
 
 - Colorise output
-- Make it installable
