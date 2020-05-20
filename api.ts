@@ -23,7 +23,7 @@ class Api {
     const rawResult = await fetch(
       `${this.#baseURL}${
         latest ? "top-headlines" : "everything"
-      }?language=en&pageSize=10${additional}&apiKey=${this.#apiKey}`,
+      }?language=en&country=in&pageSize=10${additional}&apiKey=${this.#apiKey}`,
     );
     const result = await rawResult.json();
     if (result.status === "error") displayHelpAndQuit("INVALID_KEY");

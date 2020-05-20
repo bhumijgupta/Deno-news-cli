@@ -6,7 +6,14 @@ import { parse, Args } from "https://deno.land/std/flags/mod.ts";
 import { readJsonSync } from "https://deno.land/std/fs/read_json.ts";
 import { existsSync } from "https://deno.land/std/fs/exists.ts";
 import { writeJsonSync } from "https://deno.land/std/fs/write_json.ts";
-import { green, bold } from "https://deno.land/std/fmt/colors.ts";
+import {
+  green,
+  bold,
+  bgGreen,
+  cyan,
+  yellow,
+  magenta,
+} from "https://deno.land/std/fmt/colors.ts";
 import { displayHelpAndQuit } from "./error.ts";
 import Api from "./api.ts";
 import { IArticle, IConfigFile } from "./types.d.ts";
@@ -96,16 +103,41 @@ const displayBanner = (): void => {
 ██║╚██╗██║██╔══╝  ██║███╗██║╚════██║    ██║     ██║     ██║
 ██║ ╚████║███████╗╚███╔███╔╝███████║    ╚██████╗███████╗██║
 ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝ ╚══════╝     ╚═════╝╚══════╝╚═╝
-\nFind your quick news byte at your terminal. Powered by News API\n
+\n${
+    bold(
+      green("Find your quick news byte at your terminal."),
+    )
+  } Powered by News API\n
+${yellow("Contribute at: https://github.com/bhumijgupta/Deno-news-cli")}\n
 `);
 };
 
+const showFlags = (parsedArgs: Args): void => {
+  let flagToName: Map<string, string> = new Map([
+    ["l", "latest"],
+    ["q", "query"],
+    ["c", "category"],
+  ]);
+  let flagsInfo: string[] = [];
+  Object.keys(parsedArgs).forEach((arg) => {
+    if (arg !== "_") {
+      let argName = flagToName.has(arg) ? flagToName.get(arg) : arg;
+      flagsInfo.push(`${green(`${argName}: `)}${parsedArgs[arg]}`);
+    }
+  });
+  console.log(`${flagsInfo.join("\t")}\n`);
+};
+
 const displayArticles = (news: IArticle[]): void => {
-  if (news.length === 0) console.log("No results found");
+  if (news.length === 0) {
+    console.log(magenta(`Uh Oh! Looks like we cannot find any news`));
+  }
   news.forEach((article: IArticle, i: number) => {
-    console.log(`  ${i + 1}\t${article.title}`);
+    console.log(bold(magenta(`   ${i + 1}\t${article.title}`)));
     if (article.description) console.log(`\t${article.description}`);
-    if (article.url) console.log(`\tMore info: ${article.url}\n`);
+    if (article.url) {
+      console.log(cyan(`${bold(`\tMore info:`)} ${article.url}\n`));
+    }
   });
 };
 
@@ -135,6 +167,9 @@ if (import.meta.main) {
   //   Check for API key
   let apiKey: string = getApiKey();
   const apiClient: Api = new Api(apiKey);
+
+  showFlags(parsedArgs);
+
   //   Check if all flags are valid
   let error = invalidFlags(parsedArgs);
   if (error) {

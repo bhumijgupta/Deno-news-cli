@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/bhumijgupta/Deno-news-cli/raw/master/assets/banner.png" alt="DALP logo"/></p>
+<p align="center"><img src="https://github.com/bhumijgupta/Deno-news-cli/raw/master/assets/banner.png" alt="News CLI ASCII art"/></p>
 <p align="center">Find your quick news byte at your terminal.</p>
 
 ## Installation
@@ -9,12 +9,18 @@ You can download the executable directly from GitHub.
 deno install --allow-net --allow-read --allow-write -n news-cli https://raw.githubusercontent.com/bhumijgupta/Deno-news-cli/master/mod.ts
 ```
 
+## Example
+
+Running `news-cli -latest -c technology -q Google` will give output:
+
+<p align="center"><img src="https://github.com/bhumijgupta/Deno-news-cli/raw/master/assets/screenshot.png" alt="Screenshot"/></p>
+
 ## Features
 
 - Get news headline
-- International news at your terminal
 - Get news by category
 - Get news including a keyword
+- Search for news from interntional sources
 
 ## Setup
 
@@ -24,12 +30,13 @@ deno install --allow-net --allow-read --allow-write -n news-cli https://raw.gith
    news-cli --config <API_KEY>
    ```
 3. Run the following command to get more info
-
-```
-   news-cli --help
-```
+   ```
+      news-cli --help
+   ```
 
 ## Usage
+
+Run `news-cli` in your terminal followed by any of the filters
 
 ```
 Optional filters:
