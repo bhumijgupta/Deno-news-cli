@@ -1,4 +1,4 @@
-#!/usr/bin/env -S deno --allow-net --allow-read=./news-cli.json --allow-write=./news-cli.json
+#!/usr/bin/env -S deno --allow-net --allow-read --allow-write --allow-env
 // ***************
 // IMPORTS
 // ***************
@@ -9,7 +9,6 @@ import { writeJsonSync } from "https://deno.land/std/fs/write_json.ts";
 import {
   green,
   bold,
-  bgGreen,
   cyan,
   yellow,
   magenta,
@@ -22,11 +21,16 @@ import { IArticle, IConfigFile } from "./types.d.ts";
 // ***************
 
 const setApiKey = (parsedArgs: Args): void => {
+  let homeEnv: string | undefined = Deno.env.get("HOME");
+  let home: string = "";
+  if (typeof homeEnv === "string") home = homeEnv;
+  else home = ".";
+  let configFilePath: string = `${home}/.news-cli.json`;
   if (typeof parsedArgs.config === "string") {
-    if (!existsSync("./news-cli.json")) {
-      Deno.createSync("./news-cli.json");
+    if (!existsSync(configFilePath)) {
+      Deno.createSync(configFilePath);
     }
-    writeJsonSync("./news-cli.json", { apiKey: parsedArgs.config });
+    writeJsonSync(configFilePath, { apiKey: parsedArgs.config });
     console.log(`${green(bold("Success"))} ApiKey set Successfully`);
     displayHelpAndQuit();
   } //   Handling if apiKey is not present after --config
@@ -34,8 +38,13 @@ const setApiKey = (parsedArgs: Args): void => {
 };
 
 const getApiKey = (): any => {
+  let homeEnv: string | undefined = Deno.env.get("HOME");
+  let home: string = "";
+  if (typeof homeEnv === "string") home = homeEnv;
+  else home = ".";
+  let configFilePath: string = `${home}/.news-cli.json`;
   try {
-    let file = readJsonSync("./news-cli.json");
+    let file = readJsonSync(configFilePath);
     if (typeof file === "object" && file !== null) {
       //   TODO: add custom type guard
       let configFile = file as IConfigFile;
@@ -103,11 +112,9 @@ const displayBanner = (): void => {
 ██║╚██╗██║██╔══╝  ██║███╗██║╚════██║    ██║     ██║     ██║
 ██║ ╚████║███████╗╚███╔███╔╝███████║    ╚██████╗███████╗██║
 ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝ ╚══════╝     ╚═════╝╚══════╝╚═╝
-\n${
-    bold(
-      green("Find your quick news byte at your terminal."),
-    )
-  } Powered by News API\n
+\n${bold(
+    green("Find your quick news byte at your terminal.")
+  )} Powered by News API\n
 ${yellow("Contribute at: https://github.com/bhumijgupta/Deno-news-cli")}\n
 `);
 };
@@ -125,7 +132,7 @@ const showFlags = (parsedArgs: Args): void => {
       flagsInfo.push(`${green(`${argName}: `)}${parsedArgs[arg]}`);
     }
   });
-  console.log(`${flagsInfo.join("\t")}\n`);
+  console.log(`Getting news by- \t${flagsInfo.join("\t")}\n`);
 };
 
 const displayArticles = (news: IArticle[]): void => {
@@ -181,7 +188,8 @@ if (import.meta.main) {
     let latest = parsedArgs.latest || parsedArgs.l;
     let category = parsedArgs.category || parsedArgs.c;
     let query = parsedArgs.query || parsedArgs.q;
-    let news = await apiClient.getNews(latest, category, query);
-    displayArticles(news);
+    let newsResponse = await apiClient.getNews(latest, category, query);
+    if (typeof newsResponse === "object") displayArticles(newsResponse);
+    else displayHelpAndQuit(newsResponse);
   }
 }
