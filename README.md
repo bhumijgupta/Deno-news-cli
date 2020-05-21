@@ -6,14 +6,8 @@
 You can download the executable directly from GitHub.
 
 ```
-deno install --allow-net --allow-read --allow-write -n news-cli https://raw.githubusercontent.com/bhumijgupta/Deno-news-cli/master/mod.ts
+deno install --allow-net --allow-read --allow-write --allow-env -n news-cli https://raw.githubusercontent.com/bhumijgupta/Deno-news-cli/master/mod.ts
 ```
-
-## Example
-
-Running `news-cli -latest -c technology -q Google` will give output:
-
-<p align="center"><img src="https://github.com/bhumijgupta/Deno-news-cli/raw/master/assets/screenshot.png" alt="Screenshot"/></p>
 
 ## Features
 
@@ -21,6 +15,12 @@ Running `news-cli -latest -c technology -q Google` will give output:
 - Get news by category
 - Get news including a keyword
 - Search for news from interntional sources
+
+## Example
+
+Running `news-cli -latest -c technology -q Google` will give output:
+
+<p align="center"><img src="https://github.com/bhumijgupta/Deno-news-cli/raw/master/assets/screenshot.png" alt="Screenshot"/></p>
 
 ## Setup
 
