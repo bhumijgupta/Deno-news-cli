@@ -11,7 +11,7 @@ class Api {
   getNews = async (
     latest: boolean | undefined,
     category: string | undefined,
-    query: string | undefined
+    query: string | undefined,
   ): Promise<IArticle[] | string> => {
     let additional: string = "";
     if (category) additional += `&category=${category}`;
@@ -23,7 +23,7 @@ class Api {
       const rawResult = await fetch(
         `${this.#baseURL}${
           latest ? "top-headlines" : "everything"
-        }?language=en&pageSize=10${additional}&apiKey=${this.#apiKey}`
+        }?language=en&pageSize=10${additional}&apiKey=${this.#apiKey}`,
       );
       const result = await rawResult.json();
       if (result.status === "error") return "INVALID_KEY";

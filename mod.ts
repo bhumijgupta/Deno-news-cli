@@ -2,17 +2,18 @@
 // ***************
 // IMPORTS
 // ***************
-import { parse, Args } from "https://deno.land/std/flags/mod.ts";
-import { readJsonSync } from "https://deno.land/std/fs/read_json.ts";
-import { existsSync } from "https://deno.land/std/fs/exists.ts";
-import { writeJsonSync } from "https://deno.land/std/fs/write_json.ts";
 import {
+  parse,
+  Args,
+  readJsonSync,
+  existsSync,
+  writeJsonSync,
   green,
   bold,
   cyan,
   yellow,
   magenta,
-} from "https://deno.land/std/fmt/colors.ts";
+} from "./deps.ts";
 import { displayHelpAndQuit } from "./error.ts";
 import Api from "./api.ts";
 import { IArticle, IConfigFile } from "./types.d.ts";
@@ -112,9 +113,11 @@ const displayBanner = (): void => {
 ██║╚██╗██║██╔══╝  ██║███╗██║╚════██║    ██║     ██║     ██║
 ██║ ╚████║███████╗╚███╔███╔╝███████║    ╚██████╗███████╗██║
 ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝ ╚══════╝     ╚═════╝╚══════╝╚═╝
-\n${bold(
-    green("Find your quick news byte at your terminal.")
-  )} Powered by News API\n
+\n${
+    bold(
+      green("Find your quick news byte at your terminal."),
+    )
+  } Powered by News API\n
 ${yellow("Contribute at: https://github.com/bhumijgupta/Deno-news-cli")}\n
 `);
 };

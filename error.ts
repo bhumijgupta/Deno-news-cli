@@ -1,4 +1,4 @@
-import { red, bold, cyan } from "https://deno.land/std/fmt/colors.ts";
+import { red, bold, cyan } from "./deps.ts";
 
 export const displayHelpAndQuit = (error?: string): void => {
   if (!error) {
@@ -25,7 +25,7 @@ export const displayHelpAndQuit = (error?: string): void => {
       bold(
         "-c, --category",
       )
-    }\t Find news in a valid category (only applicable if used with -l, --latest). The valid categories are: business, entertainment, general, health, science, sports, technology`,
+    }\t Find news in a valid category (only applicable if used with -l, --latest).\n\t\t\t The valid categories are: business, entertainment, general, health, science, sports, technology`,
   );
   console.log(
     `   ${
