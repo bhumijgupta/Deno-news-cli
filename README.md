@@ -14,7 +14,7 @@ deno install --allow-net --allow-read --allow-write --allow-env -n news-cli http
 - Get news headline
 - Get news by category
 - Get news including a keyword
-- Search for news from interntional sources
+- Search for news from international sources
 
 ## Example
 
@@ -44,7 +44,7 @@ Optional filters:
    -l, --latest		 If the flag is set, then news will be returned only from latest headlines
    -q, --query		 Find news related to a specific keyword
    -c, --category		 Find news in a valid category (only applicable if used with -l, --latest). The valid categories are: business, entertainment, general, health, science, sports, technology
-   --config <API_KEY>		 Set API key for news API. The key can be recieved from https://newsapi.org/
+   --config <API_KEY>		 Set API key for news API. The key can be received from https://newsapi.org/
 ```
 
 ## Linting
