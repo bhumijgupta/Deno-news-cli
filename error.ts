@@ -32,7 +32,7 @@ export const displayHelpAndQuit = (error?: string): void => {
       bold(
         "--config <API_KEY>",
       )
-    }\t Set API key for news API. The key can be recieved from ${
+    }\t Set API key for news API. The key can be received from ${
       cyan(
         `https://newsapi.org/register`,
       )

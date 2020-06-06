@@ -30,7 +30,7 @@ class Api {
       let news: IArticle[] = result.articles;
       return news;
     } catch (err) {
-      return "Cannot connect to server. Please check your internet conection";
+      return "Cannot connect to server. Please check your internet connection";
     }
   };
 }
