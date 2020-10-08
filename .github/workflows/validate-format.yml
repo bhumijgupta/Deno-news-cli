@@ -1,0 +1,20 @@
+name: Check deno format
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        deno: ["v1.x"]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Setup Deno
+      uses: denolib/setup-deno@v2
+      with:
+        deno-version: ${{ matrix.deno }}
+    - name: Check deno format
+      run: deno fmt --check
