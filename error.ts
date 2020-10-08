@@ -1,4 +1,4 @@
-import { red, bold, cyan } from "./deps.ts";
+import { bold, cyan, red } from "./deps.ts";
 
 export const displayHelpAndQuit = (error?: string): void => {
   if (!error) {

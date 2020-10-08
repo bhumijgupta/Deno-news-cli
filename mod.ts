@@ -3,16 +3,16 @@
 // IMPORTS
 // ***************
 import {
-  parse,
   Args,
-  readJsonSync,
-  existsSync,
-  writeJsonSync,
-  green,
   bold,
   cyan,
-  yellow,
+  existsSync,
+  green,
   magenta,
+  parse,
+  readJsonSync,
+  writeJsonSync,
+  yellow,
 } from "./deps.ts";
 import { displayHelpAndQuit } from "./error.ts";
 import Api from "./api.ts";
